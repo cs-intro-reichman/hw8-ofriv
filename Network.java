@@ -35,7 +35,7 @@ public class Network {
         }
         for(int i = 0; i < this.getUserCount(); i++)
         {
-            if(this.users[i].getName().equals(name))
+            if(this.users[i].getName().toLowerCase().equals(name.toLowerCase()))
             {
                 return users[i];
             }
@@ -74,8 +74,11 @@ public class Network {
         {
             return false;
         }
+        if(!this.getUser(name1).addFollowee(name2))
+        {
+            return false;
+        }
         this.getUser(name1).addFollowee(name2);
-
         return true;
     }
     
@@ -112,6 +115,10 @@ public class Network {
                 max = followeeCount(this.users[i].getName());
                 name = this.users[i].getName();
             }
+        }
+        if(max == 0)
+        {
+            return null;
         }
         return name;
     }
